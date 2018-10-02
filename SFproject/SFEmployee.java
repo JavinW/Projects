@@ -79,6 +79,10 @@ public class SFEmployee {
 	return stringEmpl;
 	} //end method
 
+	public ArrayList<String> getSchedule(ArrayList<String> schedule) {
+		return schedule;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Thanks for using the employee directory!");
 	} //end main

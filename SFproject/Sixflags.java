@@ -19,116 +19,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//add minor check feature (should be flags method - current.flags() )
-//enhance with html output capabilities
-//add date capabilities (method should create a schedule for specific dates)
+//add employee flags
+//enhance with html file output
+//add specific date feature (method should create a schedule for specific dates)
 //break up fullSchedule() into more methods and possibly  scheduleMaker() too
 public class Sixflags {
 	
 	//instance variables private to the class
 	private ArrayList<SFEmployee> employeeList = new ArrayList<SFEmployee>();
 	private String InputFile;
-// 	private ArrayList<String> sunday = new ArrayList<String>();
-// 	private ArrayList<String> monday = new ArrayList<String>();
-// 	private ArrayList<String> tuesday = new ArrayList<String>();
-// 	private ArrayList<String> wednesday = new ArrayList<String>();
-// 	private ArrayList<String> thursday = new ArrayList<String>();
-// 	private ArrayList<String> friday = new ArrayList<String>();
-// 	private ArrayList<String> saturday = new ArrayList<String>();	
-
-// 	public void scheduleMaker(String available, String empName) {
-// 		String working = available;
-// 		String employeeName = empName;
-// 		String[] workSched = working.split("/");
-// 		for (int i = 0; i < workSched.length; i++) {
-// 			if (workSched[i].equals("S")) {
-// 				sunday.add(employeeName);
-// 			} else if (workSched[i].equals("M")) {
-// 				monday.add(employeeName);
-// 			} else if (workSched[i].equals("T")) {
-// 				tuesday.add(employeeName);
-// 			} else if (workSched[i].equals("W")) {
-// 				wednesday.add(employeeName);
-// 			} else if (workSched[i].equals("Th")) {
-// 				thursday.add(employeeName);
-// 			} else if (workSched[i].equals("F")) {
-// 				friday.add(employeeName);
-// 			} else if (workSched[i].equals("Sa")) {
-// 				saturday.add(employeeName);
-// 			} else {
-// 				System.out.println("Invalid employee schedule.");	//needs to be changed 
-// 			} //end if/else series									//to throw exception
-// 		} //end for loop
-// 	} //end method
-// 
-// 
-// 	public String employeeInfo(ArrayList<String[]> workers, boolean print) {
-// 		Scanner emplInfo = new Scanner(System.in);
-// 		System.out.println("Search by name: ");
-// 		String nameToSearch = emplInfo.nextLine();
-// 		System.out.println("\n");
-// 		String schedule = printEmplInfo(nameToSearch, workers, print);
-// 		return schedule;
-// 	} //end method
-// 	
-// 	public String printEmplInfo(String nameToSearch, ArrayList<String[]> workers, boolean printing) {
-// 		String eSchedule = "";
-// 		for (int i = 0; i < workers.size(); i++){
-// 			String[] employeeArray = workers.get(i);
-// 			String employee = employeeArray[0];
-// 			if (employee.equals(nameToSearch) && printing == true){
-// 				System.out.println(employeeArray[0] + "\n" + employeeArray[1] + "\n" + 
-// 				employeeArray[2] + "\n" + employeeArray[3] + "\n" + employeeArray[4] + "\n"
-// 			+ employeeArray[5]);
-// 			} else if (employee.equals(nameToSearch) && printing == false) {
-// 				eSchedule = employeeArray[5];
-// 			}
-// 		} //end for loop
-// 		return eSchedule;
-// 	}	//end method
-// 	
-// 	public String employeeSched(ArrayList<String[]> workers) {
-// 		String singleSched = employeeInfo(workers, false);
-// 		return singleSched;
-// 	} //end method		
-// 	
-	public void fullSchedule() {
-		System.out.println("\n" + "SUNDAY" + "\n");
-		for (int i = 0; i < sunday.size(); i++) {
-			System.out.println(sunday.get(i));
-		}
-		System.out.println("\n" + "MONDAY" + "\n");
-
-		for (int i = 0; i < monday.size(); i++) {
-			System.out.println(monday.get(i));
-		}
-		System.out.println("\n" + "TUESDAY" + "\n");
-		for (int i = 0; i < tuesday.size(); i++) {
-			System.out.println(tuesday.get(i));
-		}
-		System.out.println("\n" + "WEDNESDAY" + "\n");
-		for (int i = 0; i < wednesday.size(); i++) {
-			System.out.println(wednesday.get(i));
-		}
-		System.out.println("\n" + "THURSDAY" + "\n");
-		for (int i = 0; i < thursday.size(); i++) {
-			System.out.println(thursday.get(i));
-		}
-		System.out.println("\n" + "FRIDAY" + "\n");
-		for (int i = 0; i < friday.size(); i++) {
-			System.out.println(friday.get(i));
-		}
-		System.out.println("\n" + "SATURDAY" + "\n");
-		for (int i = 0; i < saturday.size(); i++) {
-			System.out.println(saturday.get(i));
-		}
-	} //end method
-
-// 	public void flags() {
-// 		
-// 
-// 	} //end method
-
+	private ArrayList<String> sun = new ArrayList<String>();
+	private ArrayList<String> mon = new ArrayList<String>();
+	private ArrayList<String> tues = new ArrayList<String>();
+	private ArrayList<String> wed = new ArrayList<String>();
+	private ArrayList<String> thurs = new ArrayList<String>();
+	private ArrayList<String> fri = new ArrayList<String>();
+	private ArrayList<String> sat = new ArrayList<String>();
 
 //fix delete feature. Should delete employee information from schedule lists
 // 	public void deleteEmployee(ArrayList<String[]> workers) {
@@ -160,7 +66,6 @@ public class Sixflags {
 				String number = readFile.next();
 				String working = readFile.next();
 				String idNum = readFile.next();
-				//System.out.println(name + bDate + age + number + working + idNum);
 				SFEmployee newEmployee = new SFEmployee(name, bDate, age, number, working, idNum);
 				employeeList.add(newEmployee);
 			} //end while loop
@@ -233,6 +138,31 @@ public class Sixflags {
 			} //end if-else
 		} //end while
 	} //end method
+ 	 	
+	public void displaySchedule(String scheduleType) {
+		ArrayList[] fullSchedule = new ArrayList[7];
+		fullSchedule[0] = sun;
+		fullSchedule[1] = mon;
+		fullSchedule[2] = tues;
+		fullSchedule[3] = wed;
+		fullSchedule[4] = thurs;
+		fullSchedule[5] = fri;
+		fullSchedule[6] = sat;
+		if (scheduleType.equals("full")) {
+			for (int i = 0; i < fullSchedule.length; i++) {
+				ArrayList<String> daySched = getSchedule(fullSchedule[i]);
+				System.out.println(fullSchedule[i]);
+				for (int j = 0; j < daySched.size(); j++) {
+					System.out.println(daySched.get(i));
+				}
+			}
+		} else {
+			ArrayList<String> daySched = getSchedule(scheduleType);
+			for (int i = 0; i < daySched.size(); i++) {
+				System.out.println(daySched.get(i));
+			} 			//stopped here - can't call method from SFEmployee class
+		}
+	} //end method
 
 // 	public void updateInfo() {
 // 	
@@ -248,10 +178,10 @@ public class Sixflags {
 			System.out.println("Options: " + "\n" + "New employee" + "\n" 
 			+ "Show employee information" + "\n" + "Show employee schedule" + "\n" + 
 			"Show full schedule" + "\n" + "Add employee flags" + "\n" + 
-			"Update employee information" + "\n" + "Delete employee" +
-			"\n" + "Quit program" + "\n");
+			"Update employee information" + "\n" + "Delete employee" + "\n" 
+			+ "Show daily schedule"	+ "\n" + "Quit program" + "\n");
 			System.out.println("What would you like to do?");
-			String input = keyboard.nextLine();			//add choice.toLowercase()
+			String input = keyboard.nextLine();			
 			String choice = input.toLowerCase();
 			//System.out.println("This is the choice: " + choice);
 			if (choice.equals("new employee")) {
@@ -264,14 +194,18 @@ public class Sixflags {
 // 			} else if (choice.equals("Show employee schedule")) {
 // 				String showSchedule = current.employeeSched(employeeList);
 //  				System.out.println(showSchedule);
-			} else if (choice.equals("show full schedule")) {   //stopped with this
- 				current.fullSchedule();
+			} else if (choice.equals("show full schedule")) {   
+ 				current.displaySchedule("full");
 // // 			} else if (choice.equals("add employee flags")) {
 // // 				current.flags();
 // 	// 		} else if (choice.equals("delete employee")) {
 // // 				current.deleteEmployee(employeeList);
 // 			} else if (choice.equals("update employee information")) {
 // 					current.updateInfo();
+			} else if (choice.equals("show daily schedule")) {
+				System.out.println("Which day's schedule would you like to see: ");
+				String scheduleToShow = keyboard.nextLine();
+				current.displaySchedule(scheduleToShow);
 			} else if (choice.equals("quit program")) {
 				current.addToList();
 				keepGoing = false;
